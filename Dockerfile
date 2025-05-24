@@ -1,17 +1,21 @@
-FROM golang:alpine AS builder
+FROM golang:1.24 AS builder
 
-WORKDIR /build
+WORKDIR /app
 
-ADD go.mod .
+COPY go.mod go.sum ./
+RUN go mod download
 
 COPY . .
 
-RUN go build -o hello hello.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o migrate ./migrations/auto.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o app ./cmd/main.go
 
-FROM alpine
+FROM alpine:latest
 
-WORKDIR /build
+WORKDIR /root/
 
-COPY --from=builder /build/hello /build/hello
+COPY --from=builder /app/migrate .
+COPY --from=builder /app/app .
 
-CMD [". /hello"]
+RUN chmod +x ./migrate ./app
+RUN apk add --no-cache bash

@@ -6,7 +6,8 @@ Content-Type: application/json
   "email": "asd@mail.com",
   "password" : "asdqwe"
 }
-###eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZEBtYWlsLmNvbSJ9.XHyuiSf2a2nOCyR3CnOqSN5nb1Itl5JSPDZYWQuikDM
+
+###
 POST http://localhost:8081/auth/login
 Content-Type: application/json
 
@@ -17,7 +18,6 @@ Content-Type: application/json
 
 
 ###
-
 POST http://localhost:8081/link
 Content-Type: application/json
 
@@ -27,8 +27,9 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8081/MAIDNQLtxK
+GET http://localhost:8081/sfZOjIUfZG
 Content-Type: application/json
+
 ###
-GET http://localhost:8081/stat?from=2021-04-23&to=2025-05-26&by=day
+GET http://localhost:8081/stat?from=2021-04-23&to=2025-05-26&by=month
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZEBtYWlsLmNvbSJ9.XHyuiSf2a2nOCyR3CnOqSN5nb1Itl5JSPDZYWQuikDM

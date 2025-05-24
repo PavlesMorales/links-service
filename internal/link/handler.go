@@ -29,9 +29,9 @@ func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
 		EventBus:       deps.EventBus,
 	}
 	router.HandleFunc("GET /{hash}", handler.GoTo())
-	router.HandleFunc("POST /link", handler.Create())
+	router.Handle("POST /link", middleware.Auth(handler.Create(), *deps.Config))
 	router.Handle("PATCH /link/{id}", middleware.Auth(handler.Update(), *deps.Config))
-	router.HandleFunc("DELETE /link/{id}", handler.Delete())
+	router.Handle("DELETE /link/{id}", middleware.Auth(handler.Delete(), *deps.Config))
 	router.Handle("GET /link", middleware.Auth(handler.Get(), *deps.Config))
 }
 

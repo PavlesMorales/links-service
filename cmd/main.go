@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-
+	fmt.Println("Start link service...")
 	conf := configs.LoadConfig()
 	dbConf := db.NewDb(conf)
 	eventBus := event.NewEventBus()
@@ -51,7 +51,7 @@ func main() {
 
 	go statService.AddClickSubscriber()
 	server := http.Server{
-		Addr:    ":8081",
+		Addr:    ":8080",
 		Handler: stack(router),
 	}
 
