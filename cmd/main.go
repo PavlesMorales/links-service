@@ -42,6 +42,8 @@ func main() {
 		EventBus:       eventBus,
 	})
 
+	stat.NewStatHandler(router, stat.StatHandlerDeps{StatRepository: clickRep, Config: conf})
+
 	stack := middleware.Chain(
 		middleware.Cors,
 		middleware.Logging,

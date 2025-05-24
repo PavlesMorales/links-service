@@ -1,0 +1,34 @@
+POST http://localhost:8081/auth/register
+Content-Type: application/json
+
+{
+  "name" : "Ivan",
+  "email": "asd@mail.com",
+  "password" : "asdqwe"
+}
+###eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZEBtYWlsLmNvbSJ9.XHyuiSf2a2nOCyR3CnOqSN5nb1Itl5JSPDZYWQuikDM
+POST http://localhost:8081/auth/login
+Content-Type: application/json
+
+{
+  "email": "asd@mail.com",
+  "password" : "asdqwe"
+}
+
+
+###
+
+POST http://localhost:8081/link
+Content-Type: application/json
+
+{
+  "Url" : "http://google.com"
+}
+
+###
+
+GET http://localhost:8081/MAIDNQLtxK
+Content-Type: application/json
+###
+GET http://localhost:8081/stat?from=2021-04-23&to=2025-05-26&by=day
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZEBtYWlsLmNvbSJ9.XHyuiSf2a2nOCyR3CnOqSN5nb1Itl5JSPDZYWQuikDM

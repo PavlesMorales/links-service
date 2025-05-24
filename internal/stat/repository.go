@@ -3,6 +3,7 @@ package stat
 import (
 	"gorm.io/datatypes"
 	"links-service/pkg/db"
+	req "links-service/pkg/request"
 	"time"
 )
 
@@ -30,4 +31,23 @@ func (repo *StatRepository) AddClick(linkId uint) {
 		stat.Clicks++
 		repo.Database.Save(stat)
 	}
+}
+func (repo *StatRepository) GetStats(params req.StatParams) []GetStatResponse {
+	var stats []GetStatResponse
+	var selectQuery string
+	switch params.By {
+	case req.GroupByDay:
+		selectQuery = "to_char(date, 'YYYY-MM-DD') as period, sum(clicks)"
+	case req.GroupByMonth:
+		selectQuery = "to_char(date, 'YYYY-MM') as period, sum(clicks)"
+	}
+
+	repo.Database.Table("stats").
+		Select(selectQuery).
+		Where("date BETWEEN ? and ?", params.From, params.To).
+		Group("period").
+		Order("period").
+		Find(&stats)
+
+	return stats
 }
